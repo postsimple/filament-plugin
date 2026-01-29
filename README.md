@@ -41,17 +41,11 @@ Install Spatie Laravel Settings (if not already installed):
 composer require spatie/laravel-settings
 ```
 
-Publish the migration and run it:
-
-```bash
-php artisan vendor:publish --tag="filament-postsimple-settings"
-php artisan migrate
-```
-
-Optionally, publish the config file:
+Publish the config file and migration, then run the migration:
 
 ```bash
 php artisan vendor:publish --tag="filament-postsimple-config"
+php artisan migrate
 ```
 
 ## Configuration

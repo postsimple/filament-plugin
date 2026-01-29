@@ -16,12 +16,16 @@ class FilamentPostSimpleServiceProvider extends PackageServiceProvider
         $package
             ->name(static::$name)
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_postsimple_settings');
+            ->hasViews();
     }
 
     public function packageBooted(): void
     {
+        // Publish migration with config tag
+        $this->publishes([
+            __DIR__ . '/../database/migrations/create_postsimple_settings.php' => database_path('migrations/' . date('Y_m_d_His') . '_create_postsimple_settings.php'),
+        ], 'filament-postsimple-config');
+
         // Register assets if needed
         FilamentAsset::register([
             Css::make('filament-postsimple-styles', __DIR__ . '/../resources/dist/filament-postsimple.css'),
