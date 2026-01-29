@@ -6,7 +6,6 @@ use Filament\Tables\Actions\Action;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
-use PostSimple\FilamentPostSimple\Settings\PostSimpleSettings;
 
 class SendToPostSimpleTableAction extends Action
 {
@@ -63,16 +62,15 @@ class SendToPostSimpleTableAction extends Action
 
         $this->action(function (Model $record) {
             try {
-                // Get settings
-                $settings = app(PostSimpleSettings::class);
-                
-                if (empty($settings->api_key)) {
+                $apiKey = config('filament-postsimple.api_key');
+
+                if (empty($apiKey)) {
                     Notification::make()
                         ->title('PostSimple API key not configured')
-                        ->body('Please configure your API key in the PostSimple settings page.')
+                        ->body('Please set POSTSIMPLE_API_KEY in your .env file.')
                         ->danger()
                         ->send();
-                    
+
                     return;
                 }
 
@@ -104,7 +102,7 @@ class SendToPostSimpleTableAction extends Action
 
                 // Make API request
                 $response = Http::withHeaders([
-                    'X-API-PostSimple-Key' => $settings->api_key,
+                    'X-API-PostSimple-Key' => $apiKey,
                 ])
                     ->timeout(30)
                     ->post($this->apiEndpoint, [

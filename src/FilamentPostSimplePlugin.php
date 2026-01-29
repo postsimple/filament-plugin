@@ -4,7 +4,6 @@ namespace PostSimple\FilamentPostSimple;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use PostSimple\FilamentPostSimple\Pages\PostSimpleSettings;
 
 class FilamentPostSimplePlugin implements Plugin
 {
@@ -15,10 +14,7 @@ class FilamentPostSimplePlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel
-            ->pages([
-                PostSimpleSettings::class,
-            ]);
+        //
     }
 
     public function boot(Panel $panel): void

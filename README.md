@@ -12,11 +12,11 @@ Send content from your Filament admin panel to [PostSimple](https://postsimple.a
 ## Features
 
 - ✅ **One-click integration** - Send any resource to PostSimple with a single click
-- ✅ **Easy configuration** - Simple API key setup in Filament settings
+- ✅ **Easy configuration** - Simple API key setup via .env file
 - ✅ **Automatic detection** - Intelligently finds title and URL from your models
 - ✅ **Works everywhere** - Add to any Filament resource (Posts, Pages, Products, etc.)
 - ✅ **Seamless redirect** - Automatically redirects to PostSimple to view generated content
-- ✅ **Secure** - API key stored securely in settings
+- ✅ **Secure** - API key stored in environment variables
 
 ## Requirements
 
@@ -35,17 +35,10 @@ Install the package via Composer:
 composer require postsimple/filament-postsimple
 ```
 
-Install Spatie Laravel Settings (if not already installed):
-
-```bash
-composer require spatie/laravel-settings
-```
-
-Publish the config file and migration, then run the migration:
+Publish the config file (optional):
 
 ```bash
 php artisan vendor:publish --tag="filament-postsimple-config"
-php artisan migrate
 ```
 
 ## Configuration
@@ -76,12 +69,13 @@ public function panel(Panel $panel): Panel
    - Your website URL
 3. You'll receive your API key within 1-2 business days
 
-### 3. Configure the Plugin
+### 3. Configure the API Key
 
-1. Go to your Filament admin panel
-2. Navigate to **Settings → PostSimple**
-3. Enter your API key
-4. Click **Save**
+Add your PostSimple API key to your `.env` file:
+
+```env
+POSTSIMPLE_API_KEY=ps_your_api_key_here
+```
 
 ## Usage
 
@@ -340,6 +334,9 @@ The plugin publishes a config file with the following options:
 
 ```php
 return [
+    // Your PostSimple API key (required)
+    'api_key' => env('POSTSIMPLE_API_KEY'),
+
     // API endpoint (don't change unless instructed)
     'api_endpoint' => env('POSTSIMPLE_API_ENDPOINT', 'https://postsimple.link/api/plugins/create-post'),
 
@@ -351,19 +348,17 @@ return [
 ];
 ```
 
-You can override these in your `.env` file:
+Add to your `.env` file:
 
 ```env
-POSTSIMPLE_API_ENDPOINT=https://postsimple.link/api/plugins/create-post
-POSTSIMPLE_APP_URL=https://my.postsimple.app/
-POSTSIMPLE_TIMEOUT=30
+POSTSIMPLE_API_KEY=ps_your_api_key_here
 ```
 
 ## Troubleshooting
 
 ### "PostSimple API key not configured"
-- Go to **Settings → PostSimple** and enter your API key
-- Make sure you've saved the settings
+- Add `POSTSIMPLE_API_KEY=your_key` to your `.env` file
+- Run `php artisan config:clear` if using config caching
 
 ### "No title found"
 - Ensure your model has a `title`, `name`, `heading`, or `subject` field
