@@ -15,7 +15,7 @@ Send content from your Filament admin panel to [PostSimple](https://postsimple.a
 - ✅ **Easy configuration** - Simple API key setup via .env file
 - ✅ **Automatic detection** - Intelligently finds title and URL from your models
 - ✅ **Works everywhere** - Add to any Filament resource (Posts, Pages, Products, etc.)
-- ✅ **Seamless redirect** - Automatically redirects to PostSimple to view generated content
+- ✅ **Multi-language support** - Includes English and Dutch translations
 - ✅ **Secure** - API key stored in environment variables
 
 ## Requirements
@@ -81,11 +81,9 @@ POSTSIMPLE_API_KEY=ps_your_api_key_here
 
 ### Adding the Action to Resources
 
-You can add the PostSimple action to any Filament resource in two ways:
+> **Recommended:** Add the action to your `EditRecord` or `ViewRecord` pages. This ensures the record context is properly available.
 
-#### Option 1: In the Resource View/Edit Page (Header Actions)
-
-Add to your resource's `ViewRecord` or `EditRecord` page:
+Add to your resource's `EditRecord` or `ViewRecord` page:
 
 ```php
 use PostSimple\FilamentPostSimple\Actions\SendToPostSimpleAction;
@@ -99,9 +97,9 @@ protected function getHeaderActions(): array
 }
 ```
 
-#### Option 2: In the Resource Table (Row Actions)
+### Alternative: Table Row Action
 
-Add to your resource's table:
+If you prefer to add the action directly in your resource table, you can use `SendToPostSimpleTableAction`:
 
 ```php
 use PostSimple\FilamentPostSimple\Actions\SendToPostSimpleTableAction;
@@ -121,50 +119,7 @@ public static function table(Table $table): Table
 
 ### Example: Blog Post Resource
 
-Here's a complete example of adding PostSimple to a blog post resource:
-
-```php
-<?php
-
-namespace App\Filament\Resources;
-
-use App\Filament\Resources\PostResource\Pages;
-use App\Models\Post;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use PostSimple\FilamentPostSimple\Actions\SendToPostSimpleTableAction;
-
-class PostResource extends Resource
-{
-    protected static ?string $model = Post::class;
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                SendToPostSimpleTableAction::make(), // Add this line
-            ]);
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
-        ];
-    }
-}
-```
-
-And in your `EditPost` page:
+Here's a complete example of adding PostSimple to a blog post resource. Add the action to your `EditPost` page:
 
 ```php
 <?php
@@ -353,6 +308,18 @@ Add to your `.env` file:
 ```env
 POSTSIMPLE_API_KEY=ps_your_api_key_here
 ```
+
+## Translations
+
+The plugin includes translations for English and Dutch. The language is automatically detected from your Laravel application's locale.
+
+To publish and customize the translations:
+
+```bash
+php artisan vendor:publish --tag="filament-postsimple-lang"
+```
+
+This will publish the language files to `lang/vendor/filament-postsimple/`.
 
 ## Troubleshooting
 

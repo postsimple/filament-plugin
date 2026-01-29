@@ -2,6 +2,15 @@
 
 All notable changes to `filament-postsimple` will be documented in this file.
 
+## 1.2.0 - 2026-01-29
+
+### Added
+- Multi-language support (English and Dutch)
+- Publishable translation files
+
+### Fixed
+- Fixed compatibility issue with `openUrlInNewTab()` method
+
 ## 1.1.0 - 2026-01-29
 
 ### Changed
