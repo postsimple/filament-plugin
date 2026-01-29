@@ -16,7 +16,8 @@ class FilamentPostSimpleServiceProvider extends PackageServiceProvider
         $package
             ->name(static::$name)
             ->hasConfigFile()
-            ->hasViews();
+            ->hasViews()
+            ->hasMigration('create_postsimple_settings');
     }
 
     public function packageBooted(): void
