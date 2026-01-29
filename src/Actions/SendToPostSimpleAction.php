@@ -3,6 +3,7 @@
 namespace PostSimple\FilamentPostSimple\Actions;
 
 use Filament\Actions\Action;
+use Filament\Notifications\Actions\Action as NotificationAction;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
@@ -130,7 +131,7 @@ class SendToPostSimpleAction extends Action
                     ->body(__('filament-postsimple::messages.notifications.success.body'))
                     ->success()
                     ->actions([
-                        \Filament\Notifications\Actions\Action::make('view')
+                        NotificationAction::make('view')
                             ->label(__('filament-postsimple::messages.notifications.success.open_button'))
                             ->url($this->postSimpleUrl . '?batch=' . $batchId)
                             ->openUrlInNewTab()
