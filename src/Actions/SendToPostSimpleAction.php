@@ -132,7 +132,7 @@ class SendToPostSimpleAction extends Action
                     ->success()
                     ->send();
 
-                $this->dispatch('open-url-in-new-tab', url: $postSimpleLink);
+                $this->dispatch('open-url-in-new-tab', ['url' => $postSimpleLink]);
 
             } catch (\Exception $e) {
                 Notification::make()
