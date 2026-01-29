@@ -75,7 +75,7 @@ class SendToPostSimpleTableAction extends Action
                 }
 
                 // Get title - try common title fields
-                $title = $this->getRecordTitle($record);
+                $title = $this->resolveRecordTitle($record);
                 
                 if (empty($title)) {
                     Notification::make()
@@ -88,7 +88,7 @@ class SendToPostSimpleTableAction extends Action
                 }
 
                 // Get URL - try to build from route
-                $url = $this->getRecordUrl($record);
+                $url = $this->resolveRecordUrl($record);
                 
                 if (empty($url)) {
                     Notification::make()
@@ -157,7 +157,7 @@ class SendToPostSimpleTableAction extends Action
         });
     }
 
-    protected function getRecordTitle(Model $record): ?string
+    protected function resolveRecordTitle(Model $record): ?string
     {
         // If custom attribute is set, use that
         if ($this->titleAttribute) {
@@ -179,7 +179,7 @@ class SendToPostSimpleTableAction extends Action
         return class_basename($record) . ' #' . $record->getKey();
     }
 
-    protected function getRecordUrl(Model $record): ?string
+    protected function resolveRecordUrl(Model $record): ?string
     {
         // If custom URL closure is provided, use that
         if ($this->urlUsing) {
