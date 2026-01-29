@@ -2,27 +2,21 @@
 
 namespace PostSimple\FilamentPostSimple;
 
-use Filament\Support\Assets\Css;
-use Filament\Support\Facades\FilamentAsset;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class FilamentPostSimpleServiceProvider extends PackageServiceProvider
+class FilamentPostSimpleServiceProvider extends ServiceProvider
 {
-    public static string $name = 'filament-postsimple';
-
-    public function configurePackage(Package $package): void
+    public function register(): void
     {
-        $package
-            ->name(static::$name)
-            ->hasConfigFile()
-            ->hasViews();
+        $this->mergeConfigFrom(__DIR__ . '/../config/filament-postsimple.php', 'filament-postsimple');
     }
 
-    public function packageBooted(): void
+    public function boot(): void
     {
-        FilamentAsset::register([
-            Css::make('filament-postsimple-styles', __DIR__ . '/../resources/dist/filament-postsimple.css'),
-        ], 'postsimple/filament-postsimple');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/filament-postsimple.php' => config_path('filament-postsimple.php'),
+            ], 'filament-postsimple-config');
+        }
     }
 }
