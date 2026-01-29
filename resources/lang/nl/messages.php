@@ -30,8 +30,7 @@ return [
         ],
         'success' => [
             'title' => 'Succesvol verstuurd naar PostSimple!',
-            'body' => 'Klik om te bekijken in PostSimple',
-            'open_button' => 'Openen in PostSimple',
+            'body' => 'Openen in PostSimple:',
         ],
         'error' => [
             'title' => 'Fout bij versturen naar PostSimple',

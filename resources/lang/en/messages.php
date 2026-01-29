@@ -30,8 +30,7 @@ return [
         ],
         'success' => [
             'title' => 'Successfully sent to PostSimple!',
-            'body' => 'Click to view in PostSimple',
-            'open_button' => 'Open in PostSimple',
+            'body' => 'Open in PostSimple:',
         ],
         'error' => [
             'title' => 'Error sending to PostSimple',
