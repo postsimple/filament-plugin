@@ -22,7 +22,7 @@ Send content from your Filament admin panel to [PostSimple](https://postsimple.a
 
 - PHP 8.1 or higher
 - Laravel 10.0 or higher
-- Filament 3.x, 4.x, or 5.x
+- Filament 4.x or 5.x
 - **PostSimple Pro subscription** with API access
 
 > **Note:** The PostSimple API is only available with a Pro subscription. Request your API key at [api@postsimple.nl](mailto:api@postsimple.nl)

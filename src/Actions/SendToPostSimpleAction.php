@@ -129,10 +129,10 @@ class SendToPostSimpleAction extends Action
 
                 Notification::make()
                     ->title(__('filament-postsimple::messages.notifications.success.title'))
-                    ->body(__('filament-postsimple::messages.notifications.success.body') . ' ' . $postSimpleLink)
                     ->success()
-                    ->persistent()
                     ->send();
+
+                $this->dispatch('open-url-in-new-tab', url: $postSimpleLink);
 
             } catch (\Exception $e) {
                 Notification::make()
