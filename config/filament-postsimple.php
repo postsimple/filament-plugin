@@ -31,7 +31,7 @@ return [
     | The URL where users will be redirected after sending content.
     |
     */
-    'app_url' => env('POSTSIMPLE_APP_URL', 'https://my.postsimple.app/'),
+    'app_url' => env('POSTSIMPLE_APP_URL', 'https://my.postsimple.app/lab'),
 
     /*
     |--------------------------------------------------------------------------

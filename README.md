@@ -296,7 +296,7 @@ return [
     'api_endpoint' => env('POSTSIMPLE_API_ENDPOINT', 'https://postsimple.link/api/plugins/create-post'),
 
     // PostSimple app URL
-    'app_url' => env('POSTSIMPLE_APP_URL', 'https://my.postsimple.app/'),
+    'app_url' => env('POSTSIMPLE_APP_URL', 'https://my.postsimple.app/lab'),
 
     // Request timeout (seconds)
     'timeout' => env('POSTSIMPLE_TIMEOUT', 30),

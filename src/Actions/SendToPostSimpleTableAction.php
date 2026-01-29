@@ -11,7 +11,7 @@ class SendToPostSimpleTableAction extends Action
 {
     protected string $apiEndpoint = 'https://postsimple.link/api/plugins/create-post';
 
-    protected string $postSimpleUrl = 'https://my.postsimple.app/';
+    protected string $postSimpleUrl = 'https://my.postsimple.app/lab';
 
     protected ?string $titleAttribute = null;
 
